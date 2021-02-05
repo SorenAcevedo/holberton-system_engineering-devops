@@ -6,7 +6,7 @@ while [ $i -le 100 ]
 do
 	if [ $((i % 15)) -eq 0 ]
 	then
-		echo "FizBuzz"
+		echo "FizzBuzz"
 	elif [ $((i % 3)) -eq 0 ]
 	then
 		echo "Fizz"
