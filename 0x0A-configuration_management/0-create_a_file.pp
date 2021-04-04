@@ -1,3 +1,4 @@
+# Puppet file configuration
 file { 'holberton':
   ensure  => file,
   path    => '/tmp/holberton',
