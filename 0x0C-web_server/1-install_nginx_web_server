@@ -5,7 +5,7 @@
 apt-get update
 apt-get install -y nginx
 
-echo "Holberton school" > /var/www/html/index.nginx-debian.html
+echo "Holberton school" > /var/www/html/index.html
 # Nginx HTTP: This profile opens only port 80
 ufw allow 'Nginx HTTP'
 service nginx restart
