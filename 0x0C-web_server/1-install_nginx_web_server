@@ -3,9 +3,8 @@
 # First install nginx
 
 apt-get update
-apt-get install -y nginx
+apt-get -y install nginx
 
-service nginx start
 echo "Holberton school" > /var/www/html/index.nginx-debian.html
 # Nginx HTTP: This profile opens only port 80
 ufw allow 'Nginx HTTP'
