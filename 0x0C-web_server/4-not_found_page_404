@@ -11,15 +11,13 @@ sudo ufw allow 'Nginx HTTP'
 
 # Define some variables
 df_file="/etc/nginx/sites-available/default"
-err_fl="error_page.html"
-err_loc="/$err_fl {\nroot /usr/share/nginx/html;\ninternal;\n}"
 
 # Sed to add Rewrite, redirection configuration
 sudo sed -i '/server_name _;/a rewrite ^/redirect_me http://soren-acevedo.tech/ permanent;' $df_file
 
 # Sed to personalizate error
 echo "Ceci n'est pas une page" > /usr/share/nginx/html/$err_fl
-sudo sed -i "/server_name _;/a error_page 404 /$err_fl;\n\tlocation = $err_loc" $df_file
+sudo sed -i '/server_name _;/a error_page 404 /404.html;\nlocation = /error_page.html {\nroot /usr/share/nginx/html;\ninternal;\n}' $df_file
 
 # Restart nginx
 sudo service nginx restart
