@@ -2,10 +2,10 @@
 # Configures a new Ubuntu machine
 # First install nginx
 
-sudo apt-get update
-sudo apt-get install -y nginx
+apt-get update
+apt-get install -y nginx
 
 echo "Holberton school" > /var/www/html/index.nginx-debian.html
 # Nginx HTTP: This profile opens only port 80
-sudo ufw allow 'Nginx HTTP'
-sudo restart nginx
+ufw allow 'Nginx HTTP'
+service nginx restart
