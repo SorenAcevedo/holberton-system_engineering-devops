@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Configures a new Ubuntu machine
+# First install nginx
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Then, setup new doc root directories
+# And create a sample page
+echo "Holberton school" > /var/www/html/index.html
+
+# Create the server block file
+printf %s "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+        index index.html index.htm;
+        }
+}" > /etc/nginx/sites-available/default
+
+# Save changes
+sudo restart nginx
