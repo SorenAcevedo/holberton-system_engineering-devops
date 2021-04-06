@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Install virtual machine nginx
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+
+sudo service nginx start
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+# Nginx HTTP: This profile opens only port 80
+sudo ufw allow 'Nginx HTTP'
+
+# Define some variables
+df_file="/etc/nginx/sites-available/default"
+err_fl="error_page.html"
+err_loc="/$err_fl {\n\t root /usr/share/nginx/html;\n\t internal;}"
+
+# Sed to add Rewrite, redirection configuration
+sudo sed -i '/server_name _;/a rewrite ^/redirect_me http://soren-acevedo.tech/ permanent;' $df_file
+
+# Sed to personalizate error
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/$err_fl
+sudo sed -i "/server_name _;/a error_page 404 /$err_fl;\n location = $err_loc" $df_file
+
+# Restart nginx
+sudo service nginx restart
