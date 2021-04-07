@@ -8,15 +8,9 @@ echo "Holberton School" > /var/www/html/index.nginx-debian.html
 # Nginx HTTP: This profile opens only port 80
 sudo ufw allow 'Nginx HTTP'
 
-# Define some variables
-df_file="/etc/nginx/sites-available/default"
-
-# Sed to add Rewrite, redirection configuration
-sudo sed -i '/server_name _;/a rewrite ^/redirect_me http://soren-acevedo.tech/ permanent;' $df_file
-
 # Sed to personalizate error
-echo "Ceci n'est pas une page" > /var/www/html/error_page.html
-sudo sed -i "/server_name _;/a error_page 404 /error_page.html;" $df_file
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/error_page.html
+sudo sed -i "/server_name _;/a error_page 404 /error_page.html; location = /error_page.html {root /usr/share/nginx/html; internal;}" /etc/nginx/sites-available/default
 
 # Restart nginx
 sudo service nginx restart
