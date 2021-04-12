@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 # Add header with sed
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School" > /var/www/html/index.html
+sudo sed -i "/server_name _;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=OrK6QxS_ZRk permanent;" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/404_error.html
+sudo sed -i "/server_name _;/a error_page 404 /404_error.html;" /etc/nginx/sites-available/default
 sudo sed -i "/server_name _;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
 sudo service nginx restart
