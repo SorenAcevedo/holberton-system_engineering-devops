@@ -1,1 +1,17 @@
 #!/usr/bin/env bash
+# Add header with sed
+sudo apt-get update
+sudo apt-get install haproxy=1.6.\*
+
+# Config haproxy
+printf %s "frontend http_front
+  bind *:80
+
+  default_backend web-backend
+
+backend web-backend
+   balance roundrobin
+   server 2416-web-01  35.190.189.209:80
+   server 2416-web-02  54.82.30.60:80
+   " >> /etc/haproxy/haproxy.cfg
+sudo service nginx restart
