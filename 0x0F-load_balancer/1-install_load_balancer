@@ -14,4 +14,4 @@ backend web-backend
    server 2416-web-01  35.190.189.209:80
    server 2416-web-02  54.82.30.60:80
    " >> /etc/haproxy/haproxy.cfg
-sudo service nginx restart
+sudo service haproxy restart
