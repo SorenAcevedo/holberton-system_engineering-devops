@@ -1,1 +1,4 @@
 #!/usr/bin/env bash
+# Deactivate ipv6only in default config
+sudo sed -i 's/ipv6only=on//g' "/etc/nginx/sites-available/default"
+sudo service nginx restart
