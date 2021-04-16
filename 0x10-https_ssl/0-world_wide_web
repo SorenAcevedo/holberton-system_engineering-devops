@@ -1,1 +1,18 @@
 #!/usr/bin/env bash
+# Function to return information about domains and sub domains
+Function() {
+	RECORD_TYPE=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -n1 | tr '\t' ' ' | cut -d ' ' -f 4)
+	DESTINATION=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -n1 | tr '\t' ' ' | cut -d ' ' -f 5)
+	echo "The subdomain $2 is a $RECORD_TYPE record and points to $DESTINATION"
+}
+
+if [ $# == 2 ];
+	then
+		Function "$1" "$2"
+elif [ $# == 1 ];
+	then
+		Function "$1" "www"
+		Function "$1" "lb-01"
+		Function "$1" "web-01"
+		Function "$1" "web-02"
+fi
