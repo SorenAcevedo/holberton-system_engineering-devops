@@ -1,1 +1,3 @@
 #!/usr/bin/env bash
+# Run the command as a user other than the default target user (-u)
+sudo -u "$1" whoami
