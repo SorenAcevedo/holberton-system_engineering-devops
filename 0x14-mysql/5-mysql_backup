@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # MySQL backup and compress file
 
-mysqldump -u root -p"$1" --all-databases > all_databases.sql
-tar -cvfz "$(date +"%m-%d-%y")".tar.gz backup.sql
+mysqldump -u root -p"$1" --all-databases > backup.sql
+tar -cvzf "$(date +"%m-%d-%y")".tar.gz backup.sql
