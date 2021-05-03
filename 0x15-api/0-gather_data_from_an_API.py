@@ -15,12 +15,12 @@ if __name__ == "__main__":
     name = json.loads(response_name.text)['name']
     todo = json.loads(response_todo.text)
 
-    tasks = [i for i in todo if i['userId'] == int(argv[1])]
-    complete_task = len([i for i in tasks if i['completed'] is True])
+    tasks = [i for i in todo if i.get('userId') == int(argv[1])]
+    complete_task = len([i for i in tasks if i.get('completed') is True])
     total_task = len(tasks)
 
     final_response = 'Employee {} is done with tasks({}/{}):'.format(
         name, complete_task, total_task)
 
     print(final_response)
-    [print('    ' + i['title']) for i in tasks]
+    [print('\t ' + i.get('title')) for i in tasks]
