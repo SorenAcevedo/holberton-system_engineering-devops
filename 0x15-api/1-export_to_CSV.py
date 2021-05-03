@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ Module that export data in the CSV format """
-import requests
 import csv
-from sys import argv
 import json
+import requests
+from sys import argv
 
 
 if __name__ == "__main__":
@@ -16,9 +16,10 @@ if __name__ == "__main__":
     name = json.loads(response_name.text)['name']
     todo = json.loads(response_todo.text)
 
-    tasks = [i for i in todo if i['userId'] == int(argv[1])]
+    tasks = [i for i in todo if i.get('userId') == int(argv[1])]
 
     with open(argv[1] + '.csv', 'w') as f:
         for i in tasks:
             csvwriter = csv.writer(f)
-            csvwriter.writerow([argv[1], name, i['completed'], i['title']])
+            csvwriter.writerow(
+                [argv[1], name, i.get('completed'), i.get('title')])
