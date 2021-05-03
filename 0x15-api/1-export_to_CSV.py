@@ -20,6 +20,6 @@ if __name__ == "__main__":
 
     with open(argv[1] + '.csv', 'w', newline='') as f:
         for i in tasks:
-            csvwriter = csv.writer(f)
+            csvwriter = csv.writer(f, quoting=csv.QUOTE_ALL)
             csvwriter.writerow(
                 [argv[1], name, i.get('completed'), i.get('title')])
