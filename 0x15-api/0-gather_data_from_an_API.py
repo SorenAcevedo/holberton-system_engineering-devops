@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Module that use REST API """
 import requests
 from sys import argv
 import json
@@ -15,7 +16,7 @@ if __name__ == "__main__":
     todo = json.loads(response_todo.text)
 
     tasks = [i for i in todo if i['userId'] == int(argv[1])]
-    complete_task = len([i for i in tasks if i['completed'] == True])
+    complete_task = len([i for i in tasks if i['completed'] is True])
     total_task = len(tasks)
 
     final_response = 'Employee {} is done with tasks({}/{}):'.format(

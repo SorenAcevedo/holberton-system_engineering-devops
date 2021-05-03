@@ -1,1 +1,23 @@
 #!/usr/bin/python3
+""" Module that use REST API """
+import requests
+import json
+
+
+if __name__ == "__main__":
+    url_todo = 'https://jsonplaceholder.typicode.com/todos/'
+    url_user = 'https://jsonplaceholder.typicode.com/users/'
+
+    response_todo = requests.get(url_todo)
+    response_user = requests.get(url_user)
+
+    user = len(json.loads(response_user.text))
+    todo = json.loads(response_todo.text)
+
+    todo_all = {}
+    for user_id in range(1, user + 1):
+        tasks = [i for i in todo if i['userId'] == user_id]
+        todo_all[str(user_id)] = tasks
+
+    with open('todo_all_employees.json', 'w') as f:
+        json.dump(todo_all, f)
