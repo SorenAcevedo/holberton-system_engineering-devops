@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     tasks = [i for i in todo if i.get('userId') == int(argv[1])]
 
-    with open(argv[1] + '.csv', 'w') as f:
+    with open(argv[1] + '.csv', 'w', newline='') as f:
         for i in tasks:
             csvwriter = csv.writer(f)
             csvwriter.writerow(
