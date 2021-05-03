@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ Module that export data in the JSON format """
+import json
 import requests
 from sys import argv
-import json
 
 
 if __name__ == "__main__":
@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     todo = json.loads(response_todo.text)
 
-    tasks = [i for i in todo if i['userId'] == int(argv[1])]
+    tasks = [i for i in todo if i.get('userId') == int(argv[1])]
 
     with open(argv[1] + '.json', 'w') as f:
         dict = {argv[1]: tasks}
