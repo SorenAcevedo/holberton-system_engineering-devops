@@ -22,4 +22,4 @@ if __name__ == "__main__":
         for i in tasks:
             csvwriter = csv.writer(f, quoting=csv.QUOTE_ALL)
             csvwriter.writerow(
-                [argv[1], name, i.get('completed'), i.get('title')])
+                [int(argv[1]), name, i.get('completed'), i.get('title')])
