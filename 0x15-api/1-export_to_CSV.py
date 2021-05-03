@@ -13,7 +13,7 @@ if __name__ == "__main__":
     response_name = requests.get(url_name)
     response_todo = requests.get(url_todo)
 
-    name = json.loads(response_name.text)['name']
+    name = json.loads(response_name.text)['username']
     todo = json.loads(response_todo.text)
 
     tasks = [i for i in todo if i.get('userId') == int(argv[1])]
