@@ -1,30 +1,37 @@
 #!/usr/bin/python3
-"""
-    Function that queries the Reddit API and prints
-    the titles of the first 10 hot posts listed for
-    a given subreddit.
-"""
+""" This module use Reddit Api """
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=""):
+def recurse(subreddit, hot_list=[], after="", count=0):
     """
-        Return that prints the title of the first 10 hot posts.
+        Function that queries the Reddit API and returns
+        a list containing the titles of all hot articles
+        for a given subreddit.
     """
     url = 'https://www.reddit.com/r/' + subreddit + '/hot.json'
-    url = url + '?limit=100&?after=' + after
+
     headers = {
         'User-Agent': 'Chrome/90.0.4430.212 Safari/537.36'}
-    req = requests.get(url, headers=headers, allow_redirects=False)
-    if req.status_code != 200:
-        return None
 
-    list_titles = req.json().get('data').get('children')
-    for title in list_titles:
-        hot_list.append(title.get('data').get('title'))
-    
-    after = req.json().get('data').get('after')
-    if after:
-        return recurse(subreddit, hot_list, after)
+    params = {
+        "after": after,
+        "count": count,
+        "limit": 100
+    }
+
+    req = requests.get(url, headers=headers,
+                       params=params, allow_redirects=False)
+
+    if req.status_code != 200:
+        print(None)
+
+    data = req.json().get("data")
+    after = data.get("after")
+    count += data.get("dist")
+    childrens = data.get("children")
+    hot_list.extend([child.get("data").get("title") for child in childrens])
+
+    if after is not None:
+        return recurse(subreddit, hot_list, after, count)
     return hot_list
-        
