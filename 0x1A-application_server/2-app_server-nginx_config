@@ -1,0 +1,27 @@
+# Server Configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        location /airbnb-onepage/ {
+                proxy_pass http://0.0.0.0:5000;
+        }
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        add_header X-Served-By 2416-web-01;
+
+        error_page 404 /404_error.html;
+
+        rewrite ^/redirect_me https://www.youtube.com/watch?v=OrK6QxS_ZRk permanent;
+
+        location = /error_page.html {
+                root /usr/share/nginx/html; 
+                internal;
+        }
+}
